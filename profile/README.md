@@ -1,12 +1,95 @@
-## Hi there 👋
+# 가전제품 사용설명서 기반 Q&A 챗봇 서비스
 
-<!--
+## 프로젝트 멤버
+| 이름   | 담당 파트          | 주요 역할                                                                                                                                 |
+|--------|--------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 김해중 | 프론트엔드         | - Next.js 기반 사용자 인터페이스 설계<br>- 제품 선택/PDF 업로드 기능 구현<br>- 챗봇 인터페이스 개발<br>- REST API 연동 및 응답 처리                           |
+| 이준형 | 백엔드             | - Spring Boot 기반 RESTful API 개발<br>- 사용자 인증 및 권한 관리<br>- 제품 모델 CRUD 시스템<br>- ML 서버 연동 모듈 구현                              |
+| 정지윤 | ML      | - Vector DB 구축 및 RAG 파이프라인 구현<br>- LLM(vLLM) 서빙 및 추론 가속화<br>- Upstage Document Parse API 연동<br>- 주요 가전제품 사용설명서 크롤링 및 벡터화                                     |
 
-**Here are some ideas to get you started:**
 
-🙋‍♀️ A short introduction - what is your organization all about?
-🌈 Contribution guidelines - how can the community get involved?
-👩‍💻 Useful resources - where can the community find your docs? Is there anything else the community should know?
-🍿 Fun facts - what does your team eat for breakfast?
-🧙 Remember, you can do mighty things with the power of [Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
--->
+
+
+## 프로젝트 소개
+**가전제품 설명서 기반 지능형 Q&A 시스템**  
+본 서비스는 사용자가 가전제품 설명서를 업로드하거나 공용 DB에서 선택한 후, 자연어로 질문하면 AI가 설명서 내용을 분석해 답변을 제공하는 챗봇 플랫폼입니다.  
+핵심 기술: **RAG(Retrieval Augmented Generation) + LLM Fine-Tuning + REST API 기반 동기 통신**
+
+## 프로젝트 필요성
+- **문제점**:  
+  - 복잡한 설명서 탐색의 어려움
+  - 제조사 고객센터 응대 지연
+  - 오류 코드 해결을 위한 반복적인 매뉴얼 검색
+- **해결방안**:  
+  - 24/7 자동 응답 시스템 구축  
+  - 설명서 내용 기반 정확한 답변 생성  
+  - **REST API를 통한 신속한 질의응답 처리**  
+  - 이미지/텍스트 혼합 답변 지원
+
+## 관련 기술 조사(수정필요할듯)
+| 기술명               | 특징                          | 본 프로젝트 차별점                                                                 |
+|----------------------|-------------------------------|----------------------------------------------------------------------------------|
+| LG ThinQ             | 원격 제어 중심, 진단 기능 제한| **전체 설명서 기반 자연어 Q&A + 멀티모달 응답**                                |
+| Samsung SmartThings  | IoT 장치 통합 관리            | **PDF/이미지 멀티모달 처리 + 공용 DB 제공**                                    |
+| ChatPDF              | 일반 문서 Q&A                 | **가전제품 특화 도메인 지식 + 브랜드별 모델 관리**                             |
+| 매뉴얼 한국          | 수동 PDF 다운로드             | **AI 챗봇 자동 응답 + 직관적 대화형 인터페이스**                               |
+
+## 개발 결과물
+### 시스템 아키텍처(다이어그램)
+
+
+### 주요 기능
+- **개인/공용 모델 관리**: 사용자별 PDF 업로드 + 자동 벡터 변환  
+- **동기 REST API 통신**: 빠른 응답속도로 질의응답 처리 (평균 2초 이내)  
+- **멀티모달 답변**: 텍스트 + 이미지 혼합 응답 지원  
+- **도메인 특화 RAG**: 가전제품 매뉴얼에 최적화된 검색 및 생성
+
+### 기술 스택
+- **Frontend**: Next.js + TypeScript + Axios (REST API 클라이언트)
+- **Backend**: Spring Boot + MySQL + RestTemplate  
+- **ML Server**: FastAPI + vLLM + Pinecone Vector DB
+- **Infrastructure**: Azure VM
+
+## 사용 방법
+### 설치 요구사항
+- NVIDIA GPU (ML 서버용, vLLM 추론)
+- Node.js 18+ (프론트엔드)
+- Java 17+ (백엔드)
+
+### 실행 절차
+
+
+
+
+### 사용 흐름
+1. **제품 선택**: 브랜드 → 카테고리 → 모델 순서로 선택  
+2. **PDF 업로드**: 개인 매뉴얼 업로드 (자동 벡터화)  
+3. **질의응답**: 자연어 질문 입력 후 REST API를 통한 응답 수신  
+4. **멀티미디어 응답**: 텍스트 + 관련 이미지 동시 제공
+
+## 활용 방안
+### 1. 소비자 지원 서비스
+- **즉시 문제 해결**: "E3 오류" → 2초 내 해결방법 + 관련 다이어그램 제공  
+- **사용법 안내**: "세탁기 울코스 설정법" → 단계별 가이드 + 버튼 위치 이미지  
+- **안전 정보 제공**: 신속한 REST API 응답으로 긴급 안전수칙 즉시 전달
+
+### 2. 제조사 운영 효율화
+- **고객센터 부하 절감**: 반복 문의 80% 자동 처리  
+- **사용자 행동 분석**: 질문 패턴 분석을 통한 제품 개선점 도출  
+- **다국어 지원**: RAG 기반 자동 번역으로 글로벌 고객 지원
+
+### 3. 유지보수 업체 지원
+- **기술자 교육 도구**: 복잡한 매뉴얼을 대화형으로 학습  
+- **현장 지원**: 모바일에서 기술 문의 및 신속한 답변  
+- **부품 정보 조회**: 모델명 입력 시 호환 부품 리스트 + 교체 가이드 제공
+
+### 4. 확장 가능성
+- **IoT 연동**: 실제 기기 상태와 매뉴얼 정보 결합  
+- **AR/VR 통합**: 3D 모델과 설명서 정보 매핑  
+- **음성 인터페이스**: 스마트 스피커를 통한 음성 질의응답
+
+## 기대 효과
+- **사용자 만족도 향상**: 평균 문제 해결 시간 단축  
+- **운영비용 절감**: 고객센터 문의량 감소  
+- **서비스 안정성**: REST API 기반 동기 통신으로 높은 응답 신뢰도 확보  
+- **시스템 확장성**: 단순한 API 구조로 타 시스템 연동 용이
