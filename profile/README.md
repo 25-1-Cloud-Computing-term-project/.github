@@ -86,8 +86,11 @@
 
 1. **제품 선택**: 브랜드 → 카테고리 → 모델 선택  
 2. **PDF 업로드**: 개인 매뉴얼 업로드 → 문서 자동 파싱 및 벡터화  
+![1](https://github.com/user-attachments/assets/8a99d891-5945-467b-ad36-caac76e951b8)
 3. **질의응답**: 자연어로 질문 → REST API를 통해 응답 수신  
 4. **멀티미디어 응답**: 텍스트 + 관련 이미지 동시 제공
+![3](https://github.com/user-attachments/assets/ab909e0e-a3a1-4206-9eee-f0eff954c477)
+
 
 ---
 
